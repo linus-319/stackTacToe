@@ -1,6 +1,5 @@
 # ThicTacToe
 A 3D Tic Tac Toe game with real-time multiplayer support, built with Flask, React, and Three.js.
-Add screenshot here.
 
 ## Features
 - Multiplayer Mode: Create/join games with short codes.
@@ -41,20 +40,21 @@ cd stackTacToe/fontend
 npm run start
 ```
 
+### Alternative Docker Setup:
+```
+cd stackTacToe
+docker compose up -d
+```
+
 ## API Endpoints
 - Create Game: `POST /api/game/new → { gameId, joinCode }`
 - Join Game: `POST /api/game/join with { code }`
 - Make Move: `POST /api/game/<gameId>/move with { x, y, z }`
 - Get Game State: `GET /api/game/<gameId>/state`
 
-## Deployment
-
-Local: run Flask + React dev servers as above.
-
 ## Future Improvements
-- Add authentication (user accounts).
+- Redis for persistend storage.
 - Smarter AI for single-player mode.
-- Deploy to AWS (EC2 + Docker + CI/CD).
 
 ## Author
 - Thomas Fagan - [GitHub](https://github.com/Linus319)

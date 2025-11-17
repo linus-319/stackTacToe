@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, join_room, leave_room
@@ -11,8 +14,21 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 
-CORS(app)
-socketio = SocketIO(app, cors_allowed_origins=["http://localhost:3001", "http://127.0.0.1:3001", "http://192.168.1.141:3001"], allow_credentials=True, async_mode='eventlet')
+allowed_origins = [
+    "http://localhost:3000",
+    "http://192.168.10.50:3000",
+]
+
+CORS(app, supports_credentials=True, origins=allowed_origins)
+
+
+socketio = SocketIO(
+    app,
+    cors_allowed_origins=allowed_origins,
+    allow_credentials=True,
+    async_mode='eventlet',
+)
+
 
 games = {}
 short_code_mapping = {}
@@ -198,6 +214,5 @@ def handle_disconnect():
 
 
 if __name__ == '__main__':
-    import eventlet
     import eventlet.wsgi
-    socketio.run(app, host='0.0.0.0', port=5050, debug=True)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True)

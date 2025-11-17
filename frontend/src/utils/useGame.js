@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSocketEvent } from "../utils/useSocketEvent";
 
-const API_BASE = "http://192.168.1.141:5050/api";
+const API_BASE = `${process.env.REACT_APP_API_URL}/api`;
 
 export function useGame(socket, setScreen, mode, setMode) {
   const [loading, setLoading] = useState(false);

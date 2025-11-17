@@ -1,37 +1,28 @@
-version: '3.9'
-
 services:
-  nginx-proxy-manager:
-    image: 'jc21/nginx-proxy-manager:latest'
-    container_name: nginx-proxy-manager
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "81:81"     # NPM admin dashboard
-      - "443:443"
-    volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
-
   backend:
     build:
       context: ./backend
     container_name: ttt-backend
-    command: gunicorn --worker-class eventlet -w 1 -b 0.0.0.0:5050 app:app
+    command: gunicorn --worker-class eventlet -w 1 -b 0.0.0.0:5000 app:app
     volumes:
       - ./backend:/app
-    expose:
-      - "5050"
-    environment:
-      - FLASK_ENV=production
+    env_file:
+      - ./backend/.env
+    ports:
+      - "5000:5000"
     restart: unless-stopped
 
   frontend:
     build:
       context: ./frontend
     container_name: ttt-frontend
-    expose:
-      - "80"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    env_file:
+      ./frontend/.env
     depends_on:
       - backend
     restart: unless-stopped

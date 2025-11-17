@@ -6,7 +6,10 @@ import MultiplayerMenu from './components/MultiplayerMenu';
 import GameScreen from './components/GameScreen';
 import './index.css';
 
-const socket = io(process.env.REACT_APP_API_URL);
+const socket = io(process.env.REACT_APP_API_URL, {
+  transports: ['websocket'],
+  withCredentials: true,
+});
 
 function App() {
   const [screen, setScreen] = useState("home");
@@ -29,16 +32,16 @@ function App() {
 
   if (screen === "home") {
     return (
-      <HomeScreen 
-        startSinglePlayerGame={game.startSinglePlayerGame} 
-        setScreen={setScreen} 
+      <HomeScreen
+        startSinglePlayerGame={game.startSinglePlayerGame}
+        setScreen={setScreen}
       />
     );
   }
 
   if (screen === "multiplayer-menu") {
     return (
-      <MultiplayerMenu 
+      <MultiplayerMenu
         createMultiplayerGame={game.createMultiplayerGame}
         joinCode={game.joinCode}
         setJoinCode={game.setJoinCode}
