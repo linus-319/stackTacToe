@@ -14,13 +14,9 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 
-allowed_origins = [
-    "http://localhost:3000",
-    "http://192.168.10.50:3000",
-]
+allowed_origins = [os.getenv('CORS_ALLOWED_ORIGIN')]
 
 CORS(app, supports_credentials=True, origins=allowed_origins)
-
 
 socketio = SocketIO(
     app,
@@ -28,7 +24,6 @@ socketio = SocketIO(
     allow_credentials=True,
     async_mode='eventlet',
 )
-
 
 games = {}
 short_code_mapping = {}

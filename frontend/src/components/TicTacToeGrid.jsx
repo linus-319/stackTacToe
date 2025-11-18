@@ -12,7 +12,6 @@ function TicTacToeGrid({ board, makeMove, isLoading, winPositions }) {
   }
 
   const getCubeColor = (x, y, z) => {
-    console.log(winPositions);
     if (winPositions) {
       for (let i in winPositions) {
         if (winPositions[i][0] === x && winPositions[i][1] === y && winPositions[i][2] === z) {
