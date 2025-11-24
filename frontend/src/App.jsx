@@ -6,7 +6,7 @@ import MultiplayerMenu from './components/MultiplayerMenu';
 import GameScreen from './components/GameScreen';
 import './index.css';
 
-const socket = io(process.env.REACT_APP_API_URL, {
+const socket = io(window.location.origin, { // for development change window.location.origin to REACT_APP_API_URL (defined in frontend/.env)
   transports: ['websocket'],
   withCredentials: true,
 });

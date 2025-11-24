@@ -17,7 +17,7 @@ services:
       context: ./frontend
     container_name: ttt-frontend
     ports:
-      - "3000:3000"
+      - "3000:80"
     volumes:
       - ./frontend:/app
       - /app/node_modules
