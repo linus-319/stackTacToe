@@ -57,4 +57,4 @@ docker compose up -d
 - Smarter AI for single-player mode.
 
 ## Author
-- Thomas Fagan - [GitHub](https://github.com/Linus319)
+- Thomas Fagan - [GitHub](https://github.com/linus-319)
